@@ -1,0 +1,55 @@
+load("@rules_proto//proto:defs.bzl", "proto_descriptor_set", "proto_library")
+
+package(
+    default_visibility = ["//visibility:public"],
+)
+
+proto_library(
+    name = "common_proto",
+    srcs = ["common.proto"],
+    deps = [
+        "@wfa_measurement_proto//src/main/proto/wfa/measurement/api/v2alpha:event_annotations_proto",
+    ],
+)
+
+proto_library(
+    name = "display_proto",
+    srcs = ["display.proto"],
+    deps = [
+        "@wfa_measurement_proto//src/main/proto/wfa/measurement/api/v2alpha:event_annotations_proto",
+    ],
+)
+
+proto_library(
+    name = "other_proto",
+    srcs = ["other.proto"],
+    deps = [
+        "@wfa_measurement_proto//src/main/proto/wfa/measurement/api/v2alpha:event_annotations_proto",
+    ],
+)
+
+proto_library(
+    name = "video_proto",
+    srcs = ["video.proto"],
+    deps = [
+        "@wfa_measurement_proto//src/main/proto/wfa/measurement/api/v2alpha:event_annotations_proto",
+    ],
+)
+
+proto_library(
+    name = "event_proto",
+    srcs = ["event.proto"],
+    deps = [
+        ":common_proto",
+        ":display_proto",
+        ":other_proto",
+        ":video_proto",
+    ],
+)
+
+proto_descriptor_set(
+    name = "uk_pilot_event_descriptor_set",
+    deps = [
+        ":event_proto",
+    ],
+)
