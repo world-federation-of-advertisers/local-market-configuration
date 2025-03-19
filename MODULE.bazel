@@ -1,6 +1,6 @@
 module(
-    name = "wfa-local-market-configuration",
-    repo_name = "wfa_local_market_configuration",
+    name = "wfa-local-market-config",
+    repo_name = "wfa_local_market_config",
 )
 
 #  --- WFA registry modules. ---
