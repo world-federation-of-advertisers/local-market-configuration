@@ -7,12 +7,12 @@ module(
 
 bazel_dep(
     name = "rules_kotlin_jvm",
-    version = "0.6.0",
+    version = "0.8.0",
     repo_name = "wfa_rules_kotlin_jvm",
 )
 bazel_dep(
     name = "cross-media-measurement-api",
-    version = "0.72.0",
+    version = "0.82.0",
     repo_name = "wfa_measurement_proto",
 )
 

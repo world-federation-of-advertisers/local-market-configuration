@@ -40,6 +40,7 @@ proto_library(
     name = "event_proto",
     srcs = ["event.proto"],
     deps = [
+        "@wfa_measurement_proto//src/main/proto/wfa/measurement/api/v2alpha:event_annotations_proto",
         ":common_proto",
         ":display_proto",
         ":other_proto",

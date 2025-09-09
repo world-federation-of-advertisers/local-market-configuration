@@ -24,6 +24,7 @@ option java_multiple_files = true;
 message Display {
   option (.wfa.measurement.api.v2alpha.event_template) = {
     name: "display"
+    media_type: DISPLAY
     display_name: "Display Ad"
     description: "An Event Template for display ad events."
   };
@@ -33,18 +34,24 @@ message Display {
   bool viewable_0_percent_plus = 1
       [(.wfa.measurement.api.v2alpha.template_field) = {
         display_name: "Viewable 0%+"
-      }];
+        reporting_features: IMPRESSION_QUALIFICATION
+        version_added: 1
+   }];
   // More than 50% of the ad was displayed in the browser for at least
   // 1 continuous second.
   // AKA MRC Viewability standard
   bool viewable_50_percent_plus = 2
       [(.wfa.measurement.api.v2alpha.template_field) = {
         display_name: "Viewable 50%+"
-      }];
+        reporting_features: IMPRESSION_QUALIFICATION
+        version_added: 1
+       }];
   // 100% of the ad was displayed in the browser for at least
   // 1 continous second.
   bool viewable_100_percent = 3
       [(.wfa.measurement.api.v2alpha.template_field) = {
         display_name: "Viewable 100%+"
-      }];
+        reporting_features: IMPRESSION_QUALIFICATION
+        version_added: 1
+       }];
 }

@@ -16,6 +16,7 @@ syntax = "proto3";
 
 package halo_cmm.origin.uk.eventtemplate.v1;
 
+import "wfa/measurement/api/v2alpha/event_annotations.proto";
 import "origin/uk/eventtemplate/v1/common.proto";
 import "origin/uk/eventtemplate/v1/display.proto";
 import "origin/uk/eventtemplate/v1/other.proto";
@@ -25,6 +26,10 @@ option java_package = "org.halo_cmm.origin.uk.eventtemplate.v1";
 option java_multiple_files = true;
 
 message Event {
+  option (.wfa.measurement.api.v2alpha.event) = {
+    current_version: 1
+  };
+
   Common common = 1;
   Video video = 2;
   Display display = 3;
