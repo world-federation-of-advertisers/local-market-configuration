@@ -44,6 +44,7 @@ proto_library(
         ":display_proto",
         ":other_proto",
         ":video_proto",
+        "@wfa_measurement_proto//src/main/proto/wfa/measurement/api/v2alpha:event_annotations_proto",
     ],
 )
 

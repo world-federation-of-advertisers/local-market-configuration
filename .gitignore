@@ -1,1 +1,5 @@
+# Bazel convenience symlinks.
+/bazel-*
+
+# IntelliJ projects.
 .idea/
