@@ -49,7 +49,7 @@ proto_library(
 )
 
 proto_descriptor_set(
-    name = "uk_pilot_event_descriptor_set",
+    name = "event_descriptor_set",
     deps = [
         ":event_proto",
     ],
