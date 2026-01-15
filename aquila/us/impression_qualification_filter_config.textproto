@@ -1,0 +1,36 @@
+# proto-file: wfa/measurement/config/reporting/impression_qualification_filter_config.proto
+# proto-message: ImpressionQualificationFilterConfig
+
+# All measured impressions (AMI)
+impression_qualification_filters {
+  external_impression_qualification_filter_id: "ami"
+  impression_qualification_filter_id: 1
+}
+
+# MRC standard
+impression_qualification_filters {
+  external_impression_qualification_filter_id: "mrc"
+  impression_qualification_filter_id: 2
+  filter_specs {
+    media_type: DISPLAY
+    filters {
+      terms {
+        path: "display.viewable_50_percent_plus"
+        value {
+          bool_value: true
+        }
+      }
+    }
+  }
+  filter_specs {
+    media_type: VIDEO
+    filters {
+      terms {
+        path: "video.viewable_100_percent"
+        value {
+          bool_value: true
+        }
+      }
+    }
+  }
+}
