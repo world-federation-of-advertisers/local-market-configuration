@@ -39,7 +39,7 @@ message Common {
     population_attribute: true
     reporting_features: FILTERABLE
     reporting_features: GROUPABLE
-    version_added: 1
+    version_added: 2
   }];
 
   enum AgeGroup {
@@ -54,6 +54,6 @@ message Common {
     population_attribute: true
     reporting_features: FILTERABLE
     reporting_features: GROUPABLE
-    version_added: 1
+    version_added: 2
   }];
 }
