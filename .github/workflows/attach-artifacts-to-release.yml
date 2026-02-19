@@ -1,0 +1,71 @@
+# Copyright 2026 The Cross-Media Measurement Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+name: Attach artifacts to release
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+
+jobs:
+  attach-artifacts-to-release:
+    name: Attach artifacts to release
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: write
+      id-token: write
+    steps:
+      - name: Check out revision
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+
+      - name: Set up Bazel
+        uses: world-federation-of-advertisers/actions/setup-bazel@a9407321ceb8da9912face58a8139603678c869d # v2.5.0
+
+      - name: Write ~/.bazelrc
+        run: |
+          cat << EOF > ~/.bazelrc
+          common --config=ci
+          EOF
+
+      - name: Build descriptor sets
+        run: >
+          bazel build
+          //aquila/us/eventtemplate/v1:event_descriptor_set
+          //origin/uk/eventtemplate/v1:event_descriptor_set
+
+      - name: Attach artifacts to release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          artifacts=(
+            ./bazel-bin/aquila/us/eventtemplate/v1/event_descriptor_set.pb
+            ./bazel-bin/origin/uk/eventtemplate/v1/event_descriptor_set.pb
+          )
+
+          # Copy and rename artifacts. Example: aquila_us_event_descriptor_set.pb
+          artifacts_to_upload=()
+          for path in "${artifacts[@]}"; do
+            renamed_copy="${path#*/bazel-bin/}"
+            renamed_copy="${renamed_copy/eventtemplate\/v1\/}"
+            renamed_copy="${renamed_copy//\//_}"
+            artifacts_to_upload+=("${renamed_copy}")
+            cp "${path}" "${renamed_copy}"
+          done
+
+          echo "Attaching artifacts to release:"
+          gh release upload "${{ github.event.release.tag_name }}" "${artifacts_to_upload[@]}" --clobber
