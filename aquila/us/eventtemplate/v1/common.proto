@@ -17,6 +17,7 @@ syntax = "proto3";
 package halo_cmm.aquila.us.eventtemplate.v1;
 
 import "wfa/measurement/api/v2alpha/event_annotations.proto";
+import "wfa/measurement/api/v2alpha/media_type.proto";
 
 option java_package = "org.halo_cmm.aquila.us.eventtemplate.v1";
 option java_multiple_files = true;
@@ -55,5 +56,37 @@ message Common {
     reporting_features: FILTERABLE
     reporting_features: GROUPABLE
     version_added: 2
+  }];
+
+  // The media type of the event (e.g. VIDEO, DISPLAY, OTHER).
+  //
+  // This should be consistent with which media-specific sub-template is
+  // populated on the containing Event (e.g. `video`, `display`, `other`).
+  wfa.measurement.api.v2alpha.MediaType media_type = 3
+      [(.wfa.measurement.api.v2alpha.template_field) = {
+        display_name: "Media Type"
+        reporting_features: FILTERABLE
+        reporting_features: GROUPABLE
+        version_added: 3
+      }];
+
+  // EDP-specific domain on which the event was delivered, e.g.
+  // "INSTAGRAM", "FACEBOOK", "GOOGLE_AD_NETWORK". Values are defined by the
+  // EDP and are not standardized across EDPs.
+  string domain = 4 [(.wfa.measurement.api.v2alpha.template_field) = {
+    display_name: "Domain"
+    reporting_features: FILTERABLE
+    reporting_features: GROUPABLE
+    version_added: 3
+  }];
+
+  // EDP-specific environment within the domain on which the event was
+  // delivered, e.g. "FEED", "STORIES", "REELS". Values are defined by the
+  // EDP and are not standardized across EDPs.
+  string environment = 5 [(.wfa.measurement.api.v2alpha.template_field) = {
+    display_name: "Environment"
+    reporting_features: FILTERABLE
+    reporting_features: GROUPABLE
+    version_added: 3
   }];
 }

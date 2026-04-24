@@ -17,7 +17,6 @@ syntax = "proto3";
 package halo_cmm.aquila.us.eventtemplate.v1;
 
 import "aquila/us/eventtemplate/v1/common.proto";
-import "aquila/us/eventtemplate/v1/delivery.proto";
 import "aquila/us/eventtemplate/v1/display.proto";
 import "aquila/us/eventtemplate/v1/other.proto";
 import "aquila/us/eventtemplate/v1/video.proto";
@@ -35,5 +34,4 @@ message Event {
   Video video = 2;
   Display display = 3;
   Other other = 4;
-  Delivery delivery = 5;
 }
