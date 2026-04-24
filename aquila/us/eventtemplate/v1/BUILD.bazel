@@ -13,6 +13,15 @@ proto_library(
 )
 
 proto_library(
+    name = "delivery_proto",
+    srcs = ["delivery.proto"],
+    deps = [
+        "@wfa_measurement_proto//src/main/proto/wfa/measurement/api/v2alpha:event_annotations_proto",
+        "@wfa_measurement_proto//src/main/proto/wfa/measurement/api/v2alpha:media_type_proto",
+    ],
+)
+
+proto_library(
     name = "display_proto",
     srcs = ["display.proto"],
     deps = [
@@ -41,6 +50,7 @@ proto_library(
     srcs = ["event.proto"],
     deps = [
         ":common_proto",
+        ":delivery_proto",
         ":display_proto",
         ":other_proto",
         ":video_proto",
