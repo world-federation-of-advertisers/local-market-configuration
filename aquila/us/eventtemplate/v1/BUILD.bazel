@@ -8,8 +8,16 @@ proto_library(
     name = "common_proto",
     srcs = ["common.proto"],
     deps = [
+        ":meta_proto",
         "@wfa_measurement_proto//src/main/proto/wfa/measurement/api/v2alpha:event_annotations_proto",
-        "@wfa_measurement_proto//src/main/proto/wfa/measurement/api/v2alpha:media_type_proto",
+    ],
+)
+
+proto_library(
+    name = "meta_proto",
+    srcs = ["meta.proto"],
+    deps = [
+        "@wfa_measurement_proto//src/main/proto/wfa/measurement/api/v2alpha:event_annotations_proto",
     ],
 )
 
