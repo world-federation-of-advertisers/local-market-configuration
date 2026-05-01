@@ -41,7 +41,11 @@ message Meta {
     INSTAGRAM_STORIES = 11;
     MARKETPLACE = 12;
     MESSENGER = 13;
-    OTHER = 14;
+    AUDIENCE_NETWORK = 14;
+    // Used only when none of the other listed placements match. As the
+    // enumeration grows and changes over time, the set of placements that
+    // fall under OTHER may change.
+    OTHER = 15;
   }
 
   // Placement on a Meta surface.

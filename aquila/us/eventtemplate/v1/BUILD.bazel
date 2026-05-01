@@ -10,6 +10,7 @@ proto_library(
     deps = [
         ":meta_proto",
         "@wfa_measurement_proto//src/main/proto/wfa/measurement/api/v2alpha:event_annotations_proto",
+        "@wfa_measurement_proto//src/main/proto/wfa/measurement/api/v2alpha:media_type_proto",
     ],
 )
 
