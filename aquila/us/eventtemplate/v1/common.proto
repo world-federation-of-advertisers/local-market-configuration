@@ -27,7 +27,7 @@ message Common {
   option (.wfa.measurement.api.v2alpha.event_template) = {
     name: "common"
     display_name: "Aquila Common Template"
-    description: "A common base template for Aquila event filtering. all adults, no demographic filtering"
+    description: "A common base template for Aquila event filtering. Includes demo-filtering and device type."
   };
 
   enum Sex {
@@ -76,4 +76,99 @@ message Common {
   oneof edp_specific {
     Meta meta = 4;
   }
+
+  // The device type on which the event was viewed.
+  enum DeviceType {
+    DEVICE_TYPE_UNSPECIFIED = 0;
+    DEVICE_TYPE_DESKTOP = 1;
+    DEVICE_TYPE_MOBILE = 2;
+    DEVICE_TYPE_TABLET = 3;
+    DEVICE_TYPE_TV = 4;
+  }
+
+  DeviceType device_type = 5 [(.wfa.measurement.api.v2alpha.template_field) = {
+    display_name: "Device Type"
+    population_attribute: false
+    reporting_features: FILTERABLE
+    reporting_features: GROUPABLE
+    version_added: 3
+  }];
+  
+  // The US State where the event was viewed
+  enum USState {
+    US_STATE_UNSPECIFIED = 0;
+    US_STATE_AL = 1;   // Alabama
+    US_STATE_AK = 2;   // Alaska
+    US_STATE_AZ = 3;   // Arizona
+    US_STATE_AR = 4;   // Arkansas
+    US_STATE_CA = 5;   // California
+    US_STATE_CO = 6;   // Colorado
+    US_STATE_CT = 7;   // Connecticut
+    US_STATE_DE = 8;   // Delaware
+    US_STATE_FL = 9;   // Florida
+    US_STATE_GA = 10;  // Georgia
+    US_STATE_HI = 11;  // Hawaii
+    US_STATE_ID = 12;  // Idaho
+    US_STATE_IL = 13;  // Illinois
+    US_STATE_IN = 14;  // Indiana
+    US_STATE_IA = 15;  // Iowa
+    US_STATE_KS = 16;  // Kansas
+    US_STATE_KY = 17;  // Kentucky
+    US_STATE_LA = 18;  // Louisiana
+    US_STATE_ME = 19;  // Maine
+    US_STATE_MD = 20;  // Maryland
+    US_STATE_MA = 21;  // Massachusetts
+    US_STATE_MI = 22;  // Michigan
+    US_STATE_MN = 23;  // Minnesota
+    US_STATE_MS = 24;  // Mississippi
+    US_STATE_MO = 25;  // Missouri
+    US_STATE_MT = 26;  // Montana
+    US_STATE_NE = 27;  // Nebraska
+    US_STATE_NV = 28;  // Nevada
+    US_STATE_NH = 29;  // New Hampshire
+    US_STATE_NJ = 30;  // New Jersey
+    US_STATE_NM = 31;  // New Mexico
+    US_STATE_NY = 32;  // New York
+    US_STATE_NC = 33;  // North Carolina
+    US_STATE_ND = 34;  // North Dakota
+    US_STATE_OH = 35;  // Ohio
+    US_STATE_OK = 36;  // Oklahoma
+    US_STATE_OR = 37;  // Oregon
+    US_STATE_PA = 38;  // Pennsylvania
+    US_STATE_RI = 39;  // Rhode Island
+    US_STATE_SC = 40;  // South Carolina
+    US_STATE_SD = 41;  // South Dakota
+    US_STATE_TN = 42;  // Tennessee
+    US_STATE_TX = 43;  // Texas
+    US_STATE_UT = 44;  // Utah
+    US_STATE_VT = 45;  // Vermont
+    US_STATE_VA = 46;  // Virginia
+    US_STATE_WA = 47;  // Washington
+    US_STATE_WV = 48;  // West Virginia
+    US_STATE_WI = 49;  // Wisconsin
+    US_STATE_WY = 50;  // Wyoming
+    //US_STATE_DC = 51;  // District of Columbia - open question: is this required?
+  }
+
+  USState us_state = 6 [(.wfa.measurement.api.v2alpha.template_field) = {
+    display_name: "US State"
+    population_attribute: true
+    reporting_features: FILTERABLE
+    reporting_features: GROUPABLE
+    version_added: 3
+  }];
+
+  enum ChildrenInHousehold {
+    CHILDREN_IN_HOUSEHOLD_UNSPECIFIED = 0;
+    CHILDREN_IN_HOUSEHOLD_NO = 1;
+    CHILDREN_IN_HOUSEHOLD_YES = 2;
+  }
+
+  ChildrenInHousehold children_in_household = 7 [(.wfa.measurement.api.v2alpha.template_field) = {
+    display_name: "Children in Household"
+    population_attribute: true
+    reporting_features: FILTERABLE
+    reporting_features: GROUPABLE
+    version_added: 3
+  }];
 }
