@@ -147,7 +147,7 @@ message Common {
     US_STATE_WV = 48;  // West Virginia
     US_STATE_WI = 49;  // Wisconsin
     US_STATE_WY = 50;  // Wyoming
-    //US_STATE_DC = 51;  // District of Columbia - open question: is this required?
+    US_STATE_DC = 51;  // District of Columbia
   }
 
   USState us_state = 6 [(.wfa.measurement.api.v2alpha.template_field) = {
@@ -158,14 +158,15 @@ message Common {
     version_added: 3
   }];
 
-  enum ChildrenInHousehold {
-    CHILDREN_IN_HOUSEHOLD_UNSPECIFIED = 0;
-    CHILDREN_IN_HOUSEHOLD_NO = 1;
-    CHILDREN_IN_HOUSEHOLD_YES = 2;
+  // Parental status indicates presence of children in the household
+  enum ParentalStatus {
+    PARENTAL_STATUS_UNSPECIFIED = 0;
+    PARENTAL_STATUS_NOT_PARENT = 1;
+    PARENTAL_STATUS_PARENT = 2;
   }
 
-  ChildrenInHousehold children_in_household = 7 [(.wfa.measurement.api.v2alpha.template_field) = {
-    display_name: "Children in Household"
+  ParentalStatus parental_status = 7 [(.wfa.measurement.api.v2alpha.template_field) = {
+    display_name: "Parental Status"
     population_attribute: true
     reporting_features: FILTERABLE
     reporting_features: GROUPABLE
