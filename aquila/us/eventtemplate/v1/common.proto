@@ -77,10 +77,9 @@ message Common {
     Meta meta = 4;
   }
 
-  // The device type on which the event was viewed.
-  // UNSPECIFIED is an invalid value.
+  // The type of device that an event could be viewed on.
   enum DeviceType {
-    DEVICE_TYPE_UNSPECIFIED = 0;
+    DEVICE_TYPE_UNKNOWN = 0;
     DESKTOP = 1;
     MOBILE = 2;
     TABLET = 3;
@@ -88,6 +87,7 @@ message Common {
     OTHER = 5;
   }
 
+  // The type of device on which the event was viewed.
   DeviceType device_type = 5 [(.wfa.measurement.api.v2alpha.template_field) = {
     display_name: "Device Type"
     population_attribute: false
@@ -96,16 +96,13 @@ message Common {
     version_added: 4
   }];
 
-  // US state or the District of Columbia. A high-cardinality attribute, to
-  // exercise grouping and filtering over a large value set. A different
-  // geography (countries, DMAs, etc.) would be modeled as its own enum and
-  // field rather than added here.
-  //
+  // US state or the District of Columbia.
   // Enum values are the state's FIPS 5-2 numeric code
-  // (https://transition.fcc.gov/oet/info/maps/census/fips/fips.txt). The
-  // reserved numbers are FIPS codes not assigned to a state or DC.
+  // (https://transition.fcc.gov/oet/info/maps/census/fips/fips.txt).
+  // The reserved numbers are FIPS codes not assigned to a state or DC
+  // and are unused values in the standard.
   enum UsState {
-    US_STATE_UNSPECIFIED = 0;
+    US_STATE_UNKNOWN = 0;
     reserved 3, 7, 14, 43, 52;
     ALABAMA = 1;
     ALASKA = 2;
@@ -160,10 +157,8 @@ message Common {
     WYOMING = 56;
   }
 
-  // `population_attribute` is true here because this models the virtual
-  // person's home state. A geo attribute indicating where the event
-  // originated, rather than the person's home geo, should instead set
-  // `population_attribute` to false.
+  // The state or district within the United States of America which
+  // is the person's home state.
   UsState us_state = 6 [(.wfa.measurement.api.v2alpha.template_field) = {
     display_name: "US State"
     population_attribute: true
@@ -172,17 +167,13 @@ message Common {
     version_added: 4
   }];
 
-  // 'Parental Status' is defined as 'the presence of children under the
-  // age of 18 in the household' (Product feedback indicates that
-  // this name is friendlier and more succinct than the more accurate
-  // 'Presence of Children in Household').
-
+  // 'Parental Status' of a person. A parent is defined as a person with
+  // children under the age of 18 in their household.
   enum ParentalStatus {
     PARENTAL_STATUS_UNSPECIFIED = 0;
     NOT_PARENT = 1;
     PARENT = 2;
   }
-
   ParentalStatus parental_status = 7
       [(.wfa.measurement.api.v2alpha.template_field) = {
         display_name: "Parental Status"
