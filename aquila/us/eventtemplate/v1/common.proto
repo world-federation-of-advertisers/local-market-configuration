@@ -79,7 +79,7 @@ message Common {
 
   // The type of device that an event could be viewed on.
   enum DeviceType {
-    DEVICE_TYPE_UNKNOWN = 0;
+    DEVICE_TYPE_UNSPECIFIED = 0;
     DESKTOP = 1;
     MOBILE = 2;
     TABLET = 3;
@@ -102,7 +102,7 @@ message Common {
   // The reserved numbers are FIPS codes not assigned to a state or DC
   // and are unused values in the standard.
   enum UsState {
-    US_STATE_UNKNOWN = 0;
+    US_STATE_UNSPECIFIED = 0;
     reserved 3, 7, 14, 43, 52;
     ALABAMA = 1;
     ALASKA = 2;
@@ -157,8 +157,8 @@ message Common {
     WYOMING = 56;
   }
 
-  // The state or district within the United States of America which
-  // is the person's home state.
+  // The state or district within the United States of America where
+  // the event was viewed.
   UsState us_state = 6 [(.wfa.measurement.api.v2alpha.template_field) = {
     display_name: "US State"
     population_attribute: true
