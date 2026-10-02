@@ -28,6 +28,8 @@ option java_multiple_files = true;
 message Event {
   option (.wfa.measurement.api.v2alpha.event) = {
     current_version: 4
+    event_data_providers: [
+        "AMAZON", "COMSCORE", "META", "TIKTTOK", "YOUTUBE"]
   };
 
   Common common = 1;
