@@ -102,7 +102,15 @@ message Common {
   // The reserved numbers are FIPS codes not assigned to a state or DC
   // and are unused values in the standard.
   enum UsState {
-    US_STATE_UNSPECIFIED = 0;
+    option (.wfa.measurement.api.v2alpha.event_template) = {
+      // Set of EDPs that support all non-zero values.
+      supported_data_providers = ["META", "YOUTUBE"]
+    }
+    US_STATE_UNSPECIFIED = 0 [
+        (.wfa.measurement.api.v2alpha.event_template_value) = {
+        supported_data_providers = ["COMSCORE"]
+        }
+    ];
     reserved 3, 7, 14, 43, 52;
     ALABAMA = 1;
     ALASKA = 2;
@@ -182,4 +190,57 @@ message Common {
         reporting_features: GROUPABLE
         version_added: 4
       }];
+
+
+// It's pretty clear that if we make this change that we will need a template
+// validator. Some things that need to be validated:
+// * EDP names used on values/templates match the ones in the event
+// * The fulls set of EDPs are covered for each ET. (?)
+  enum MRCStandardStatus {
+    MRC_STANDARD_STATUS_UNSPECIFIED = 0 [
+        (.wfa.measurement.api.v2alpha.event_template_value) = {
+          event_filter = "((media_type = DISPLAY || media_type = VIDEO))"
+          supported_data_providers = ["META"]
+        }
+      ];
+     MEETS = 1 [
+        (.wfa.measurement.api.v2alpha.event_template_value) = {
+          event_filter = "((media_type = DISPLAY
+                        && display.viewable_100_percent = true)
+                     ||
+                     (media_type = VIDEO
+                        && video.viewable_100_percent = true))"
+          supported_data_providers = ["YOUTUBE", "COMSCORE"]
+        }
+      ];
+    DOES_NOT_MEET = 2 [
+        (.wfa.measurement.api.v2alpha.event_template_value) = {
+          event_filter = "((media_type = DISPLAY
+                        && display.viewable_100_percent = false)
+                     ||
+                     (media_type = VIDEO
+                        && video.viewable_100_percent = false))"
+        supported_data_providers = ["YOUTUBE", "COMSCORE"]
+        }
+      ];
+    NOT_APPLICABLE = 4 [
+        (.wfa.measurement.api.v2alpha.event_template_value) = {
+          event_filter = "((media_type != DISPLAY && media_type != VIDEO))"
+          supported_data_providers = []
+        }
+      ];
+    // ? - could add another category here for "AMI" which for
+    // reach would allow EDPs supporting multiple categories above
+    // to dedupe across them.
+  }
+  MrcStandardStatus cross_media_mrc_status = 9
+      [(.wfa.measurement.api.v2alpha.template_field) = {
+        display_name: "Parental Status"
+        population_attribute: true
+        reporting_features: FILTERABLE
+        reporting_features: GROUPABLE
+        virtual: true
+        version_added: 4
+      }];
+
 }
