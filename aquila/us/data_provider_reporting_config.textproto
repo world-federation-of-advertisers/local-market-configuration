@@ -1,0 +1,135 @@
+# proto-file: wfa/measurement/config/reporting/data_provider_field_support_config.proto
+# proto-message: DataProviderFieldSupportConfig
+#
+# Interval start times are midnight America/New_York. An unset end_time means
+# support is open-ended.
+
+# ComScore
+data_provider_field_supports {
+  data_provider: "dataProviders/IIxzneG8u1E"
+
+  field_support {
+    field_path: "common.age_group"
+    # 2026-01-01T00:00:00-05:00
+    supported_interval { start_time { seconds: 1767243600 } }
+    all_enum_values: true
+  }
+  field_support {
+    field_path: "common.sex"
+    # 2026-01-01T00:00:00-05:00
+    supported_interval { start_time { seconds: 1767243600 } }
+    all_enum_values: true
+  }
+  field_support {
+    field_path: "video.viewable_100_percent"
+    # 2026-01-01T00:00:00-05:00
+    supported_interval { start_time { seconds: 1767243600 } }
+  }
+  field_support {
+    field_path: "common.device_type"
+    # 2026-12-01T00:00:00-05:00
+    supported_interval { start_time { seconds: 1796101200 } }
+    all_enum_values: true
+  }
+  field_support {
+    field_path: "common.parental_status"
+    # 2027-02-01T00:00:00-05:00
+    supported_interval { start_time { seconds: 1801458000 } }
+    all_enum_values: true
+  }
+  # ComScore does not populate us_state.
+  field_support {
+    field_path: "common.us_state"
+    # 2026-01-01T00:00:00-05:00
+    supported_interval { start_time { seconds: 1767243600 } }
+    enum_values: "US_STATE_UNSPECIFIED"
+  }
+}
+
+# Google
+data_provider_field_supports {
+  data_provider: "dataProviders/ZHYsic0eko0"
+
+  field_support {
+    field_path: "common.age_group"
+    # 2026-01-01T00:00:00-05:00
+    supported_interval { start_time { seconds: 1767243600 } }
+    all_enum_values: true
+  }
+  field_support {
+    field_path: "common.sex"
+    # 2026-01-01T00:00:00-05:00
+    supported_interval { start_time { seconds: 1767243600 } }
+    all_enum_values: true
+  }
+  field_support {
+    field_path: "video.viewable_100_percent"
+    # 2026-01-01T00:00:00-05:00
+    supported_interval { start_time { seconds: 1767243600 } }
+  }
+  field_support {
+    field_path: "video.viewable_50_percent_plus"
+    # 2026-01-01T00:00:00-05:00
+    supported_interval { start_time { seconds: 1767243600 } }
+  }
+  field_support {
+    field_path: "display.viewable_50_percent_plus"
+    # 2026-12-01T00:00:00-05:00
+    supported_interval { start_time { seconds: 1796101200 } }
+  }
+  field_support {
+    field_path: "common.device_type"
+    # 2026-12-01T00:00:00-05:00
+    supported_interval { start_time { seconds: 1796101200 } }
+    all_enum_values: true
+  }
+  field_support {
+    field_path: "common.us_state"
+    # 2027-02-01T00:00:00-05:00
+    supported_interval { start_time { seconds: 1801458000 } }
+    all_enum_values: true
+  }
+  # Google does not populate parental_status.
+  field_support {
+    field_path: "common.parental_status"
+    # 2027-02-01T00:00:00-05:00
+    supported_interval { start_time { seconds: 1801458000 } }
+    enum_values: "PARENTAL_STATUS_UNSPECIFIED"
+  }
+}
+
+# Meta
+data_provider_field_supports {
+  data_provider: "dataProviders/P8xrCkbWKBM"
+
+  field_support {
+    field_path: "common.age_group"
+    # 2026-01-01T00:00:00-05:00
+    supported_interval { start_time { seconds: 1767243600 } }
+    all_enum_values: true
+  }
+  field_support {
+    field_path: "common.sex"
+    # 2026-01-01T00:00:00-05:00
+    supported_interval { start_time { seconds: 1767243600 } }
+    all_enum_values: true
+  }
+  field_support {
+    field_path: "common.device_type"
+    # 2026-12-01T00:00:00-05:00
+    supported_interval { start_time { seconds: 1796101200 } }
+    all_enum_values: true
+  }
+  field_support {
+    field_path: "common.us_state"
+    # 2027-02-01T00:00:00-05:00
+    supported_interval { start_time { seconds: 1801458000 } }
+    all_enum_values: true
+  }
+  field_support {
+    field_path: "common.parental_status"
+    # 2027-02-01T00:00:00-05:00
+    supported_interval { start_time { seconds: 1801458000 } }
+    all_enum_values: true
+  }
+}

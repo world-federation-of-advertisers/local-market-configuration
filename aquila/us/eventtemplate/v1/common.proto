@@ -182,4 +182,90 @@ message Common {
         reporting_features: GROUPABLE
         version_added: 4
       }];
+
+  // Cross-media MRC viewability status. Virtual: resolved at report time
+  // from the media-specific viewability fields. Never populated by a
+  // DataProvider.
+  //
+  // Video must have 100% of pixels in view for at least 2 continuous
+  // seconds. Display must have at least 50% of pixels in view for at least
+  // 1 continuous second.
+  enum CrossMediaMrcStatus {
+    // A video or display event whose DataProvider does not support the
+    // source fields for the reporting window.
+    CROSS_MEDIA_MRC_STATUS_UNSPECIFIED = 0
+        [(.wfa.measurement.api.v2alpha.event_template_value) = {
+          event_filter: "common.media_type == VIDEO || common.media_type == DISPLAY"
+        }];
+    CROSS_MEDIA_MRC_STATUS_MEETS = 1
+        [(.wfa.measurement.api.v2alpha.event_template_value) = {
+          event_filter: "(common.media_type == VIDEO && video.viewable_100_percent)"
+                        " || (common.media_type == DISPLAY"
+                        " && display.viewable_50_percent_plus)"
+        }];
+    CROSS_MEDIA_MRC_STATUS_DOES_NOT_MEET = 2
+        [(.wfa.measurement.api.v2alpha.event_template_value) = {
+          event_filter: "(common.media_type == VIDEO && !video.viewable_100_percent)"
+                        " || (common.media_type == DISPLAY"
+                        " && !display.viewable_50_percent_plus)"
+        }];
+    // The MRC standard is not defined for the event's media type.
+    CROSS_MEDIA_MRC_STATUS_NOT_APPLICABLE = 3
+        [(.wfa.measurement.api.v2alpha.event_template_value) = {
+          event_filter: "common.media_type != VIDEO && common.media_type != DISPLAY"
+        }];
+  }
+
+  CrossMediaMrcStatus cross_media_mrc_status = 8
+      [(.wfa.measurement.api.v2alpha.template_field) = {
+        display_name: "Cross-Media MRC Status"
+        population_attribute: false
+        virtual: true
+        reporting_features: FILTERABLE
+        reporting_features: GROUPABLE
+        version_added: 5
+      }];
+
+  // Digital MRC viewability status. Virtual: resolved at report time
+  // from the media-specific viewability fields. Never populated by a
+  // DataProvider.
+  //
+  // Video must have at least 50% of pixels in view for at least 2 continuous
+  // seconds. Display must have at least 50% of pixels in view for at least
+  // 1 continuous second.
+  enum DigitalMrcStatus {
+    // A video or display event whose DataProvider does not support the
+    // source fields for the reporting window.
+    DIGITAL_MRC_STATUS_UNSPECIFIED = 0
+        [(.wfa.measurement.api.v2alpha.event_template_value) = {
+          event_filter: "common.media_type == VIDEO || common.media_type == DISPLAY"
+        }];
+    DIGITAL_MRC_STATUS_MEETS = 1
+        [(.wfa.measurement.api.v2alpha.event_template_value) = {
+          event_filter: "(common.media_type == VIDEO && video.viewable_50_percent_plus)"
+                        " || (common.media_type == DISPLAY"
+                        " && display.viewable_50_percent_plus)"
+        }];
+    DIGITAL_MRC_STATUS_DOES_NOT_MEET = 2
+        [(.wfa.measurement.api.v2alpha.event_template_value) = {
+          event_filter: "(common.media_type == VIDEO && !video.viewable_50_percent_plus)"
+                        " || (common.media_type == DISPLAY"
+                        " && !display.viewable_50_percent_plus)"
+        }];
+    // The MRC standard is not defined for the event's media type.
+    DIGITAL_MRC_STATUS_NOT_APPLICABLE = 3
+        [(.wfa.measurement.api.v2alpha.event_template_value) = {
+          event_filter: "common.media_type != VIDEO && common.media_type != DISPLAY"
+        }];
+  }
+
+  DigitalMrcStatus digital_mrc_status = 9
+      [(.wfa.measurement.api.v2alpha.template_field) = {
+        display_name: "Digital MRC Status"
+        population_attribute: false
+        virtual: true
+        reporting_features: FILTERABLE
+        reporting_features: GROUPABLE
+        version_added: 5
+      }];
 }
