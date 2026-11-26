@@ -25,9 +25,17 @@ import "wfa/measurement/api/v2alpha/event_annotations.proto";
 option java_package = "org.halo_cmm.aquila.us.eventtemplate.v1";
 option java_multiple_files = true;
 
+// Version history:
+//   2: Added `Common.sex` and `Common.age_group`.
+//   3: Added `Common.media_type` and `Meta.placement`.
+//   4: Unused. Changes moved to version 6.
+//   5: Replaced `Common.age_group` with `Common.age_group_v2`, which splits
+//      18-34 at 21.
+//   6: Added `Common.device_type`, `Common.us_state` and
+//      `Common.parental_status`.
 message Event {
   option (.wfa.measurement.api.v2alpha.event) = {
-    current_version: 4
+    current_version: 6
   };
 
   Common common = 1;

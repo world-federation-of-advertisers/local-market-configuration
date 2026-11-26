@@ -44,19 +44,22 @@ message Common {
     version_added: 2
   }];
 
+  // Age group of a person.
   enum AgeGroup {
     AGE_GROUP_UNSPECIFIED = 0;
     YEARS_18_TO_34 = 1;
     YEARS_35_TO_54 = 2;
     YEARS_55_PLUS = 3;
   }
-
+  
+  // Replaced by `age_group_v2` from version 5.
   AgeGroup age_group = 2 [(.wfa.measurement.api.v2alpha.template_field) = {
     display_name: "Age Group"
     population_attribute: true
     reporting_features: FILTERABLE
     reporting_features: GROUPABLE
     version_added: 2
+    version_removed: 5
   }];
 
   // Media type of the event.
@@ -93,7 +96,7 @@ message Common {
     population_attribute: false
     reporting_features: FILTERABLE
     reporting_features: GROUPABLE
-    version_added: 4
+    version_added: 6
   }];
 
   // US state or the District of Columbia.
@@ -164,7 +167,7 @@ message Common {
     population_attribute: true
     reporting_features: FILTERABLE
     reporting_features: GROUPABLE
-    version_added: 4
+    version_added: 6
   }];
 
   // 'Parental Status' of a person. A parent is defined as a person with
@@ -180,6 +183,23 @@ message Common {
         population_attribute: true
         reporting_features: FILTERABLE
         reporting_features: GROUPABLE
-        version_added: 4
+        version_added: 6
       }];
+
+  // Age group of a person, with 18-34 split at the US legal drinking age.
+  enum AgeGroupV2 {
+    AGE_GROUP_V2_UNSPECIFIED = 0;
+    AGE_GROUP_V2_18_TO_20 = 1;
+    AGE_GROUP_V2_21_TO_34 = 2;
+    AGE_GROUP_V2_35_TO_54 = 3;
+    AGE_GROUP_V2_55_PLUS = 4;
+  }
+  // Replaces `age_group` from version 5.
+  AgeGroupV2 age_group_v2 = 8 [(.wfa.measurement.api.v2alpha.template_field) = {
+    display_name: "Age Group"
+    population_attribute: true
+    reporting_features: FILTERABLE
+    reporting_features: GROUPABLE
+    version_added: 5
+  }];
 }
